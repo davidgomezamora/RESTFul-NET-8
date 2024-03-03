@@ -9,3 +9,16 @@ C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul\Core\Domain\obj\Debug\net8
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul\Core\Domain\obj\Debug\net8.0\refint\Core.Domain.dll
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul\Core\Domain\obj\Debug\net8.0\Core.Domain.pdb
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul\Core\Domain\obj\Debug\net8.0\ref\Core.Domain.dll
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\bin\Debug\net8.0\Core.Domain.deps.json
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\bin\Debug\net8.0\Core.Domain.dll
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\bin\Debug\net8.0\Core.Domain.pdb
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\obj\Debug\net8.0\Domain.csproj.AssemblyReference.cache
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\obj\Debug\net8.0\Domain.sourcelink.json
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\obj\Debug\net8.0\Core.Domain.dll
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\obj\Debug\net8.0\refint\Core.Domain.dll
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\obj\Debug\net8.0\Core.Domain.pdb
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Domain\obj\Debug\net8.0\ref\Core.Domain.dll
