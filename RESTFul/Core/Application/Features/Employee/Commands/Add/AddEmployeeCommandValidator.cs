@@ -1,27 +1,22 @@
 ﻿using Core.Application.Package.Consants;
 using Core.Application.Package.Extensions;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Core.Application.Features.Employees.Commands.Add
+namespace Core.Application.Features.Employee.Commands.Add
 {
-    public class AddCommandValidator : AbstractValidator<AddCommand>
+    public class AddEmployeeCommandValidator : AbstractValidator<AddEmployeeCommand>
     {
-        public AddCommandValidator()
+        public AddEmployeeCommandValidator()
         {
             RuleFor(p => p.LastName)
                 .NotEmpty().WithName("last name").WithNotEmptyMessage()
-                .NotNull().WithNotNullMessage("{PropertyName}")
-                .MaximumLength(20).WithMaxLengthMessage("{PropertyName}");
+                .NotNull().WithNotNullMessage(ValidationPlaceholders.PropertyName)
+                .MaximumLength(20).WithNotMaxLengthValidMessage(ValidationPlaceholders.PropertyName);
 
             RuleFor(p => p.FirstName)
-                .NotEmpty()
-                .NotNull()
-                .MaximumLength(10);
+                .NotEmpty().OverridePropertyName("first name").WithNotEmptyMessage()
+                .NotNull().WithNotNullMessage(ValidationPlaceholders.PropertyName)
+                .MaximumLength(10).WithNotMaxLengthValidMessage(ValidationPlaceholders.PropertyName);
 
             RuleFor(p => p.Title)
                 .MaximumLength(30);
@@ -45,7 +40,8 @@ namespace Core.Application.Features.Employees.Commands.Add
                 .MaximumLength(15);
 
             RuleFor(p => p.HomePhone)
-                .Matches(@"^\d{3}-\d{7}$")
+                .Matches(RegularExpressions.Phone).WithNotPhoneValidMessage(ValidationPlaceholders.PropertyName)
+                .MinimumLength(14)
                 .MaximumLength(24);
 
             RuleFor(p => p.Extension)

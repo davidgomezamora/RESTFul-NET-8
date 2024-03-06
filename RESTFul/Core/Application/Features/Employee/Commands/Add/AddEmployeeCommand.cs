@@ -1,11 +1,9 @@
-﻿using Core.Application.Wrappers;
-using MediatR;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using Core.Application.Package.Commands.Add;
+using Core.Domain.Entities;
 
-namespace Core.Application.Features.Employees.Commands.Add
+namespace Core.Application.Features.Employee.Commands.Add
 {
-    public class AddCommand : IRequest<Response<object>>
+    public class AddEmployeeCommand : AddCommand<Employees>
     {
         public string LastName { get; set; } = null!;
         public string FirstName { get; set; } = null!;

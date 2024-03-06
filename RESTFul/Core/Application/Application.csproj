@@ -17,20 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="Features\Employees\Commands\Remove\" />
-    <Folder Include="Features\Employees\Commands\Modify\" />
-    <Folder Include="Features\Employees\Queries\GetById\" />
-    <Folder Include="Features\Employees\Queries\GetAll\" />
-    <Folder Include="Features\Employees\Queries\GetPaginated\" />
-    <Folder Include="Filters\" />
-    <Folder Include="Mapings\" />
-    <Folder Include="Behaviors\" />
-    <Folder Include="Exceptions\" />
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
