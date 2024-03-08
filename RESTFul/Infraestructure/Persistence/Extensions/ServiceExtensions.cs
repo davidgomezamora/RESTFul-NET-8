@@ -12,8 +12,12 @@ namespace Infraestructure.Persistence.Extensions
         {
             services.AddPersistenceLayerBase();
 
+            services.AddScoped(typeof(DbContext), typeof(NorthwindContext));
+
             services.AddDbContext<NorthwindContext>(opt =>
             {
+                opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+
                 opt.UseSqlServer(configuration.GetConnectionString("NorthwindDatabase"), x =>
                 {
                     x.MigrationsAssembly(typeof(NorthwindContext).Assembly.FullName);

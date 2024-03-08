@@ -7,8 +7,10 @@ namespace Core.Application.Package.Commands.Add
 {
     public class AddCommandHandler<TCommand, TEntity> : IRequestHandler<TCommand, Response<TEntity>> where TCommand : AddCommand<TEntity> where TEntity : class
     {
-        protected readonly IRepository<TEntity> _repository;
-        protected readonly IMapper _mapper;
+        private readonly IRepository<TEntity> _repository;
+        private readonly IMapper _mapper;
+        protected IRepository<TEntity> Repository { get => _repository; }
+        protected IMapper Mapper { get => _mapper; }
 
         public AddCommandHandler(IRepository<TEntity> repository, IMapper mapper)
         {

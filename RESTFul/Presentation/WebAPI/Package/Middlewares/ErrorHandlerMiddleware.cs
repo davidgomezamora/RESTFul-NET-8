@@ -1,6 +1,8 @@
-﻿using Core.Application.Wrappers;
+﻿using Core.Application.Package.Exceptions;
 using FluentValidation;
 using Microsoft.Extensions.Options;
+using Presentation.WebAPI.Package.DTOs;
+using Presentation.WebAPI.Package.Exceptions;
 using Presentation.WebAPI.Package.Middlewares.Options;
 using System.Net;
 using System.Text.Json;
@@ -29,37 +31,49 @@ namespace Presentation.WebAPI.Package.Middlewares
                 HttpResponse httpResponse = context.Response;
                 httpResponse.ContentType = "application/json";
 
-                string responseMessage = "An error occurred";
-
-                if (_options.ViewException)
-                {
-                    responseMessage = exception.Message;
-                }
-
-                Response<string> response = new(responseMessage);
+                string message;
+                IEnumerable<string>? details = null;
+                string? suggestion = null;
+                string path = context.Request.Path;
+                string traceIdentifier = context.TraceIdentifier;
 
                 switch (exception)
                 {
-                    case ApplicationException:
+                    case ApiException:
                         // API exception
+                        httpResponse.StatusCode = (int)HttpStatusCode.ExpectationFailed;
+                        message = "An error occurred processing the request";
+                        break;
+                    case ApiVersionException exp:
+                        // API version exception
                         httpResponse.StatusCode = (int)HttpStatusCode.BadRequest;
+                        details = exp.Details;
+                        message = "Unsupported API version";
                         break;
                     case ValidationException exp:
                         // Validation exception
                         httpResponse.StatusCode = (int)HttpStatusCode.BadRequest;
-                        response = new(exception.Message, exp.Errors.Select(x => x.ErrorMessage));
+                        details = exp.Errors.Select(x => x.ErrorMessage);
+                        message = "A validation error occurred";
                         break;
                     case KeyNotFoundException:
                         // Not found exception
                         httpResponse.StatusCode = (int)HttpStatusCode.NotFound;
+                        message = "Resource not found";
                         break;
                     default:
                         // Unhandled exception
                         httpResponse.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        message = "An unexpected error occurred";
                         break;
                 }
 
-                string result = JsonSerializer.Serialize(response);
+                if (_options.DevelopmentEnvironment)
+                {
+                    message = exception.Message;
+                }
+
+                string result = JsonSerializer.Serialize(ErrorResponseDto.GetResponse((HttpStatusCode)httpResponse.StatusCode, message, path, traceIdentifier, suggestion: suggestion, details: details));
 
                 await httpResponse.WriteAsync(result);
             }

@@ -2,6 +2,6 @@
 {
     public class ErrorHandlerMiddlewareOptions
     {
-        public bool ViewException { get; set; } = true;
+        public bool DevelopmentEnvironment { get; set; }
     }
 }

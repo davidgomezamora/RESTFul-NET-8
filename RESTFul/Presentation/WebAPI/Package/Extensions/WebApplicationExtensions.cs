@@ -8,15 +8,11 @@ namespace Presentation.WebAPI.Package.Extensions
     {
         public static void AddPresentationLayerBase(this WebApplication application)
         {
-            bool viewException = false;
-
             // Configure the HTTP request pipeline.
             if (application.Environment.IsDevelopment())
             {
                 application.UseSwagger();
                 application.UseSwaggerUI();
-
-                //viewException = true;
             }
 
             application.UseHttpsRedirection();
@@ -27,7 +23,7 @@ namespace Presentation.WebAPI.Package.Extensions
 
             application.UseErrorHandlingMiddleware(new()
             {
-                ViewException = viewException
+                DevelopmentEnvironment = application.Environment.IsDevelopment()
             });
         }
 

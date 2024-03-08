@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "x4DS7Bf5VqSfEAg1QGjtMhQE9kd4uN/1n9Lm/MzX1ZOEkIxjaHFj21DynUg/rDCrf0L4/gkIrU4tNyB8WKcJZw==",
+  "dgSpecHash": "RoPqTHmcL6ZrclKMNzjbyGhFZ51ON08EAZ52I6T0BpQtwjifYSza84BbyIErPVFs014seWNaH4IjKibpiiAIsQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\David Andrés Gómez Z\\Documents\\Git\\RESTFul-NET-8\\RESTFul\\Presentation\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\David Andrés Gómez Z\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.9.0\\fluentvalidation.dependencyinjectionextensions.11.9.0.nupkg.sha512",
     "C:\\Users\\David Andrés Gómez Z\\.nuget\\packages\\mediatr\\12.2.0\\mediatr.12.2.0.nupkg.sha512",
     "C:\\Users\\David Andrés Gómez Z\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
+    "C:\\Users\\David Andrés Gómez Z\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.1.0\\microsoft.aspnetcore.mvc.versioning.5.1.0.nupkg.sha512",
     "C:\\Users\\David Andrés Gómez Z\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\David Andrés Gómez Z\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\David Andrés Gómez Z\\.nuget\\packages\\microsoft.data.sqlclient\\5.1.4\\microsoft.data.sqlclient.5.1.4.nupkg.sha512",
