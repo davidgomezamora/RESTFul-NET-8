@@ -1,9 +1,9 @@
-﻿using Core.Application.Wrappers;
+﻿using Core.Application.Package.Wrappers;
 using MediatR;
 
 namespace Core.Application.Package.Commands.Add
 {
-    public class AddCommand<TEntity> : IRequest<Response<TEntity>> where TEntity : class
+    public class AddCommand<T> : IRequest<Response<T>>
     {
     }
 }

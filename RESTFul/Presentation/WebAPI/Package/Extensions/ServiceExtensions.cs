@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.Versioning;
+using Presentation.WebAPI.Package.Extensions.Options;
 using Presentation.WebAPI.Package.Providers;
 
 namespace Presentation.WebAPI.Package.Extensions
 {
     public static class ServiceExtensions
     {
-        public static void AddPresentationLayerBase(this IServiceCollection services)
+        public static void AddPresentationLayerBase(this IServiceCollection services, PresentationLayerBaseOptions options)
         {
             services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -14,7 +15,7 @@ namespace Presentation.WebAPI.Package.Extensions
 
             services.AddApiVersioning(opt =>
             {
-                opt.DefaultApiVersion = new(1, 0);
+                opt.DefaultApiVersion = options.DefaultApiVersion;
                 opt.AssumeDefaultVersionWhenUnspecified = true;
                 opt.ReportApiVersions = true;
                 opt.ApiVersionReader = ApiVersionReader.Combine(

@@ -11,13 +11,9 @@ namespace Presentation.WebAPI.Package.DTOs
         public string Path { get; }
         public string? Suggestion { get; set; }
 
-        private ErrorDto()
+        public ErrorDto(string code, string message, string path)
         {
             Timestamp = DateTime.Now;
-        }
-
-        public ErrorDto(string code, string message, string path) : this()
-        {
             Code = code;
             Message = message;
             Path = path;

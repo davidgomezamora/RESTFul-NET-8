@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using Presentation.WebAPI.Package.Middlewares;
+﻿using Presentation.WebAPI.Package.Middlewares;
 using Presentation.WebAPI.Package.Middlewares.Options;
 
 namespace Presentation.WebAPI.Package.Extensions
@@ -29,7 +28,7 @@ namespace Presentation.WebAPI.Package.Extensions
 
         public static void UseErrorHandlingMiddleware(this WebApplication application, ErrorHandlerMiddlewareOptions options)
         {
-            application.UseMiddleware<ErrorHandlerMiddleware>(Options.Create(options));
+            application.UseMiddleware<ErrorHandlerMiddleware>(Microsoft.Extensions.Options.Options.Create(options));
         }
     }
 }

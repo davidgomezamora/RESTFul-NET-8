@@ -1,9 +1,8 @@
 ﻿using Core.Application.Package.Commands.Add;
-using Core.Domain.Entities;
 
 namespace Core.Application.Features.Employee.Commands.Add
 {
-    public class AddEmployeeCommand : AddCommand<Employees>
+    public class AddEmployeeCommand : AddCommand<int>
     {
         public string LastName { get; set; } = null!;
         public string FirstName { get; set; } = null!;

@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
 using Core.Application.Package.Interfaces;
-using Core.Application.Wrappers;
+using Core.Application.Package.Wrappers;
 using MediatR;
 
 namespace Core.Application.Package.Commands.Add
 {
-    public class AddCommandHandler<TCommand, TEntity> : IRequestHandler<TCommand, Response<TEntity>> where TCommand : AddCommand<TEntity> where TEntity : class
+    public class AddCommandHandler<TCommand, TEntity, TResponse> : IRequestHandler<TCommand, Response<TResponse>> where TCommand : AddCommand<TResponse> where TEntity : class
     {
-        private readonly IRepository<TEntity> _repository;
-        private readonly IMapper _mapper;
-        protected IRepository<TEntity> Repository { get => _repository; }
-        protected IMapper Mapper { get => _mapper; }
+        protected readonly IRepository<TEntity> _repository;
+        protected readonly IMapper _mapper;
 
         public AddCommandHandler(IRepository<TEntity> repository, IMapper mapper)
         {
@@ -18,13 +16,25 @@ namespace Core.Application.Package.Commands.Add
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<Response<TEntity>> Handle(TCommand request, CancellationToken cancellationToken)
+        public async Task<Response<TResponse>> Handle(TCommand request, CancellationToken cancellationToken)
         {
             TEntity entity = _mapper.Map<TEntity>(request);
 
-            TEntity result = await _repository.AddAsync(entity, cancellationToken);
+            TEntity resultEntity = await _repository.AddAsync(entity, cancellationToken);
 
-            return new Response<TEntity>(result);
+            if (resultEntity is null)
+            {
+                return new Response<TResponse>($"The entity <{nameof(TEntity)}> could not be added to the database.");
+            }
+
+            TResponse? responseType = _repository.GetKeyValue<TResponse>(resultEntity);
+
+            if (responseType is null)
+            {
+                return new Response<TResponse>($"The entity <{nameof(TEntity)}> was added to the database, but the identifier of the new record could not be retrieved.");
+            }
+
+            return new Response<TResponse>(responseType, $"The entity <{nameof(TEntity)}> was added to the database.");
         }
     }
 }

@@ -6,7 +6,10 @@ namespace Presentation.WebAPI.Extensions
     {
         public static void AddPresentationLayer(this IServiceCollection services)
         {
-            services.AddPresentationLayerBase();
+            services.AddPresentationLayerBase(new()
+            {
+                DefaultApiVersion = new(1, 0)
+            });
         }
     }
 }
