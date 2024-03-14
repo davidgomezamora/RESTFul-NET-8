@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "Presentation\WebAPI\WebAPI.csproj", "{8291C510-26E2-464A-BB96-CBE0E1693E18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "Presentation\WebAPI\WebAPI.csproj", "{8291C510-26E2-464A-BB96-CBE0E1693E18}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ED74046B-AEBB-495C-B217-0655BE6A15F3}"
 EndProject
@@ -17,13 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{3BCBAA40-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "integration", "integration", "{AD39D73C-7F31-4D2B-8EBF-EF3621AB09DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Core\Application\Application.csproj", "{F390F4AD-6826-4676-84EB-C765FF7810F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Core\Application\Application.csproj", "{F390F4AD-6826-4676-84EB-C765FF7810F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Core\Domain\Domain.csproj", "{55E56AFE-8450-470F-85DA-3D33D0D2D02D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Core\Domain\Domain.csproj", "{55E56AFE-8450-470F-85DA-3D33D0D2D02D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Infraestructure\Persistence\Persistence.csproj", "{7C4D6CA2-2FB5-47C1-ADC8-1106596688F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "Infraestructure\Persistence\Persistence.csproj", "{7C4D6CA2-2FB5-47C1-ADC8-1106596688F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Infraestructure\Shared\Shared.csproj", "{EBFD8061-FA8D-42A8-8A74-B8ED9C3F9241}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shared", "Infraestructure\Shared\Shared.csproj", "{EBFD8061-FA8D-42A8-8A74-B8ED9C3F9241}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{5E922655-0DDF-4E27-BD6C-465B92571EC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{EBFD8061-FA8D-42A8-8A74-B8ED9C3F9241}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBFD8061-FA8D-42A8-8A74-B8ED9C3F9241}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBFD8061-FA8D-42A8-8A74-B8ED9C3F9241}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E922655-0DDF-4E27-BD6C-465B92571EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E922655-0DDF-4E27-BD6C-465B92571EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E922655-0DDF-4E27-BD6C-465B92571EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E922655-0DDF-4E27-BD6C-465B92571EC4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{55E56AFE-8450-470F-85DA-3D33D0D2D02D} = {79CE9D22-D84E-49E4-8D4D-99769525319C}
 		{7C4D6CA2-2FB5-47C1-ADC8-1106596688F8} = {591184B5-C2B2-4609-AA18-1D4D26F6A02F}
 		{EBFD8061-FA8D-42A8-8A74-B8ED9C3F9241} = {591184B5-C2B2-4609-AA18-1D4D26F6A02F}
+		{5E922655-0DDF-4E27-BD6C-465B92571EC4} = {ED74046B-AEBB-495C-B217-0655BE6A15F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6B681146-5E4E-426A-9BBD-F5663B263ABF}

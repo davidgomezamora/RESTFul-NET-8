@@ -13,6 +13,8 @@ C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Applica
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Application\bin\Debug\net8.0\Core.Application.dll
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Application\bin\Debug\net8.0\Core.Application.pdb
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Application\bin\Debug\net8.0\Core.Domain.dll
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Application\bin\Debug\net8.0\Shared.dll
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Application\bin\Debug\net8.0\Shared.pdb
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Application\bin\Debug\net8.0\Core.Domain.pdb
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Application\obj\Debug\net8.0\Application.csproj.AssemblyReference.cache
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Core\Application\obj\Debug\net8.0\Application.GeneratedMSBuildEditorConfig.editorconfig

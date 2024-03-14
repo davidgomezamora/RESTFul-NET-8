@@ -16,7 +16,9 @@ C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Infraestruct
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Infraestructure\Persistence\bin\Debug\net8.0\Core.Application.dll
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Infraestructure\Persistence\bin\Debug\net8.0\Core.Domain.dll
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Infraestructure\Persistence\bin\Debug\net8.0\Infraestructure.Shared.dll
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Infraestructure\Persistence\bin\Debug\net8.0\Shared.dll
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Infraestructure\Persistence\bin\Debug\net8.0\Core.Application.pdb
+C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Infraestructure\Persistence\bin\Debug\net8.0\Shared.pdb
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Infraestructure\Persistence\bin\Debug\net8.0\Infraestructure.Shared.pdb
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Infraestructure\Persistence\bin\Debug\net8.0\Core.Domain.pdb
 C:\Users\David Andrés Gómez Z\Documents\Git\RESTFul-NET-8\RESTFul\Infraestructure\Persistence\obj\Debug\net8.0\Persistence.csproj.AssemblyReference.cache

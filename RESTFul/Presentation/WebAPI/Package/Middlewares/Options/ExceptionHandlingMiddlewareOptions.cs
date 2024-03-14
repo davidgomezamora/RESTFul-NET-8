@@ -1,6 +1,6 @@
 ﻿namespace Presentation.WebAPI.Package.Middlewares.Options
 {
-    public class ErrorHandlerMiddlewareOptions
+    public class ExceptionHandlingMiddlewareOptions
     {
         public bool DevelopmentEnvironment { get; set; }
     }

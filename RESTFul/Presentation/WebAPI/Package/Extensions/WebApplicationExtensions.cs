@@ -26,9 +26,9 @@ namespace Presentation.WebAPI.Package.Extensions
             });
         }
 
-        public static void UseErrorHandlingMiddleware(this WebApplication application, ErrorHandlerMiddlewareOptions options)
+        public static void UseErrorHandlingMiddleware(this WebApplication application, ExceptionHandlingMiddlewareOptions options)
         {
-            application.UseMiddleware<ErrorHandlerMiddleware>(Microsoft.Extensions.Options.Options.Create(options));
+            application.UseMiddleware<ExceptionHandlingMiddleware>(Microsoft.Extensions.Options.Options.Create(options));
         }
     }
 }

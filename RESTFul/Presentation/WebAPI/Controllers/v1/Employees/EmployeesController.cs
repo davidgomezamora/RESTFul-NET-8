@@ -1,4 +1,5 @@
-﻿using Core.Application.Features.Employee.Commands.Add;
+﻿using Asp.Versioning;
+using Core.Application.Features.Employee.Commands.Add;
 using Core.Application.Package.Wrappers;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.WebAPI.Controllers.v1.Employees.DTOs;
@@ -9,19 +10,25 @@ namespace Presentation.WebAPI.Controllers.v1.Employees
     [ApiVersion("1.0")]
     public class EmployeesController : BaseApiController
     {
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] EmployeeForAddDto addDto, CancellationToken cancellationToken)
+        [HttpGet(Name = "GetEmployee")]
+        public async Task<IActionResult> Get(CancellationToken cancellationToken)
+        {
+            return Ok();
+        }
+
+        [HttpPost(Name = "AddEmployee")]
+        public async Task<IActionResult> Add([FromBody] EmployeeForAddDto addDto, CancellationToken cancellationToken)
         {
             AddEmployeeCommand command = Mapper.Map<AddEmployeeCommand>(addDto);
 
-            Response<int> response = await Mediator.Send(command, cancellationToken);
+            Result<int> result = await Mediator.Send(command, cancellationToken);
 
-            if (!response.Succeeded)
+            if (!result.Succeeded)
             {
                 return BadRequest("The record could not be added.");
             }
 
-            return Ok(response.Result);
+            return Created("GetEmployee", result);
         }
     }
 }

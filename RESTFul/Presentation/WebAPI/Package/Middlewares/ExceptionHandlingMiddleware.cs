@@ -1,26 +1,26 @@
 ﻿using Core.Application.Package.Exceptions;
 using FluentValidation;
 using Microsoft.Extensions.Options;
-using Presentation.WebAPI.Package.DTOs;
 using Presentation.WebAPI.Package.Exceptions;
 using Presentation.WebAPI.Package.Middlewares.Options;
+using Presentation.WebAPI.Package.Wrappers;
 using System.Net;
 using System.Text.Json;
 
 namespace Presentation.WebAPI.Package.Middlewares
 {
-    public class ErrorHandlerMiddleware
+    public class ExceptionHandlingMiddleware
     {
         private readonly RequestDelegate _nex;
-        private readonly ErrorHandlerMiddlewareOptions _options;
+        private readonly ExceptionHandlingMiddlewareOptions _options;
 
-        public ErrorHandlerMiddleware(RequestDelegate next, IOptions<ErrorHandlerMiddlewareOptions> options)
+        public ExceptionHandlingMiddleware(RequestDelegate next, IOptions<ExceptionHandlingMiddlewareOptions> options)
         {
             _nex = next;
             _options = options.Value;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {
@@ -28,55 +28,60 @@ namespace Presentation.WebAPI.Package.Middlewares
             }
             catch (Exception exception)
             {
-                HttpResponse httpResponse = context.Response;
-                httpResponse.ContentType = "application/json";
+                context.Response.ContentType = "application/problem+json";
 
                 string message;
-                IEnumerable<string>? details = null;
-                string? suggestion = null;
-                string path = context.Request.Path;
-                string traceIdentifier = context.TraceIdentifier;
+                IEnumerable<string>? suggestions = null;
+                string instance = context.Request.Path;
+                string traceId = context.TraceIdentifier;
 
                 switch (exception)
                 {
                     case ApiException:
                         // API exception
-                        httpResponse.StatusCode = (int)HttpStatusCode.ExpectationFailed;
+                        context.Response.StatusCode = (int)HttpStatusCode.ExpectationFailed;
                         message = "An error occurred processing the request";
                         break;
                     case ApiVersionException exp:
                         // API version exception
-                        httpResponse.StatusCode = (int)HttpStatusCode.BadRequest;
-                        details = exp.Details;
+                        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        suggestions = exp.Suggestions;
                         message = "Unsupported API version";
                         break;
                     case ValidationException exp:
                         // Validation exception
-                        httpResponse.StatusCode = (int)HttpStatusCode.BadRequest;
-                        details = exp.Errors.Select(x => x.ErrorMessage);
+                        context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                        suggestions = exp.Errors.Select(x => x.ErrorMessage);
                         message = "A validation error occurred";
                         break;
                     case KeyNotFoundException:
                         // Not found exception
-                        httpResponse.StatusCode = (int)HttpStatusCode.NotFound;
+                        context.Response.StatusCode = (int)HttpStatusCode.NotFound;
                         message = "Resource not found";
                         break;
                     default:
                         // Unhandled exception
-                        httpResponse.StatusCode = (int)HttpStatusCode.InternalServerError;
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                         message = "An unexpected error occurred";
                         break;
                 }
 
                 if (_options.DevelopmentEnvironment)
                 {
-                    message = exception.Message;
+                    // message = exception.Message;
                 }
 
-                string result = JsonSerializer.Serialize(ErrorResponseDto.GetResponse((HttpStatusCode)httpResponse.StatusCode, message, path, traceIdentifier, suggestion: suggestion, details: details));
+                ErrorResponse<Exception> errorResponse = new(exception, (HttpStatusCode)context.Response.StatusCode, instance, traceId, message: message, suggestions: suggestions);
 
-                await httpResponse.WriteAsync(result);
+                string result = JsonSerializer.Serialize(errorResponse);
+
+                await context.Response.WriteAsync(result);
             }
+        }
+
+        public ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
         }
     }
 }

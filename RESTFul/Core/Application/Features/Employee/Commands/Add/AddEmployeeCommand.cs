@@ -4,8 +4,8 @@ namespace Core.Application.Features.Employee.Commands.Add
 {
     public class AddEmployeeCommand : AddCommand<int>
     {
-        public string LastName { get; set; } = null!;
-        public string FirstName { get; set; } = null!;
+        public string? LastName { get; set; }
+        public string? FirstName { get; set; }
         public string? Title { get; set; }
         public string? TitleOfCourtesy { get; set; }
         public DateTime? BirthDate { get; set; }

@@ -2,7 +2,7 @@
 {
     public class ApiVersionException : Exception
     {
-        public IEnumerable<string>? Details { get; set; }
+        public IEnumerable<string>? Suggestions { get; set; }
 
         public ApiVersionException() : base("Unsupported API version")
         {

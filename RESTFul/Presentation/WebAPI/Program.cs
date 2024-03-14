@@ -5,6 +5,8 @@ using Presentation.WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddPresentationLayer();
+
 // Add services to the container.
 
 #region Layer Services

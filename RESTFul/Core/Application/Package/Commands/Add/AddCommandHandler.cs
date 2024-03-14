@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Core.Application.Package.Commands.Add
 {
-    public class AddCommandHandler<TCommand, TEntity, TResponse> : IRequestHandler<TCommand, Response<TResponse>> where TCommand : AddCommand<TResponse> where TEntity : class
+    public class AddCommandHandler<TCommand, TEntity, TResponse> : IRequestHandler<TCommand, Result<TResponse>> where TCommand : AddCommand<TResponse> where TEntity : class
     {
         protected readonly IRepository<TEntity> _repository;
         protected readonly IMapper _mapper;
@@ -16,7 +16,7 @@ namespace Core.Application.Package.Commands.Add
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        public async Task<Response<TResponse>> Handle(TCommand request, CancellationToken cancellationToken)
+        public async Task<Result<TResponse>> Handle(TCommand request, CancellationToken cancellationToken)
         {
             TEntity entity = _mapper.Map<TEntity>(request);
 
@@ -24,17 +24,17 @@ namespace Core.Application.Package.Commands.Add
 
             if (resultEntity is null)
             {
-                return new Response<TResponse>($"The entity <{nameof(TEntity)}> could not be added to the database.");
+                return new Result<TResponse>($"The entity <{nameof(TEntity)}> could not be added to the database.");
             }
 
             TResponse? responseType = _repository.GetKeyValue<TResponse>(resultEntity);
 
             if (responseType is null)
             {
-                return new Response<TResponse>($"The entity <{nameof(TEntity)}> was added to the database, but the identifier of the new record could not be retrieved.");
+                return new Result<TResponse>($"The entity <{nameof(TEntity)}> was added to the database, but the identifier of the new record could not be retrieved.");
             }
 
-            return new Response<TResponse>(responseType, $"The entity <{nameof(TEntity)}> was added to the database.");
+            return new Result<TResponse>(responseType, $"The entity <{nameof(TEntity)}> was added to the database.");
         }
     }
 }
