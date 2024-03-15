@@ -13,7 +13,7 @@ namespace Presentation.WebAPI.Package.Wrappers
             Error = error;
         }
 
-        public ErrorResponse(TException exception, HttpStatusCode status, string instance, string traceId, string? message, IEnumerable<string>? suggestions = null) : base(false, status, instance, traceId)
+        public ErrorResponse(TException exception, HttpStatusCode status, string instance, string traceId, string? message = null, IEnumerable<string>? suggestions = null) : base(false, status, instance, traceId)
         {
             Message = message;
 

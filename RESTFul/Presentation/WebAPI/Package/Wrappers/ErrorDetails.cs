@@ -1,9 +1,5 @@
 ﻿using Shared.Package.Extensions;
-using System.Collections;
-using System.Diagnostics;
-using System.Reflection;
 using System.Text.Json.Serialization;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Presentation.WebAPI.Package.Wrappers
 {

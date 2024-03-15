@@ -1,5 +1,6 @@
 ﻿using Asp.Versioning;
 using Asp.Versioning.Conventions;
+using Presentation.WebAPI.Package.ExceptionHandlers;
 using Presentation.WebAPI.Package.Extensions.Options;
 using Presentation.WebAPI.Package.ProblemDetailWriters;
 
@@ -14,6 +15,11 @@ namespace Presentation.WebAPI.Package.Extensions
             services.AddControllers();
 
             services.AddTransient<IProblemDetailsWriter, ApiVersioningProblemDetailsWriter>();
+
+            services.AddExceptionHandler<ApiExceptionHandler>();
+            services.AddExceptionHandler<ValidationExceptionHandler>();
+            services.AddExceptionHandler<ApiVersionExceptionHandler>();
+            services.AddExceptionHandler<GlobalExceptionHandler>();
 
             services.AddProblemDetails();
 
