@@ -28,14 +28,16 @@ namespace Presentation.WebAPI.Package.Wrappers
         [JsonPropertyOrder(-1)]
         public DateTime Timestamp { get; }
 
-        public Response(bool success, HttpStatusCode status, string instance, string traceId)
+        public Response(bool success, HttpContext httpContext)
         {
-            Type = $"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{(int)status}";
-            Title = Enum.GetName(typeof(HttpStatusCode), status)?.SplitPascalCase();
+            int statusCode = httpContext.Response.StatusCode;
+
+            Type = $"https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/{statusCode}";
+            Title = Enum.GetName(typeof(HttpStatusCode), (HttpStatusCode)statusCode)?.SplitPascalCase();
             Sucess = success;
-            Status = (int)status;
-            Instance = instance;
-            TraceId = traceId;
+            Status = statusCode;
+            Instance = httpContext.Request.Path;
+            TraceId = httpContext.TraceIdentifier;
             Timestamp = DateTime.Now;
         }
     }

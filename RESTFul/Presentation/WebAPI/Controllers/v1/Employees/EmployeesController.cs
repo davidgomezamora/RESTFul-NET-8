@@ -11,13 +11,13 @@ namespace Presentation.WebAPI.Controllers.v1.Employees
     public class EmployeesController : BaseApiController
     {
         [HttpGet(Name = "GetEmployee")]
-        public async Task<IActionResult> Get(CancellationToken cancellationToken)
+        public async Task<IActionResult> GetAsync(CancellationToken cancellationToken)
         {
             return Ok();
         }
 
         [HttpPost(Name = "AddEmployee")]
-        public async Task<IActionResult> Add([FromBody] EmployeeForAddDto addDto, CancellationToken cancellationToken)
+        public async Task<IActionResult> AddAsync([FromBody] EmployeeForAddDto addDto, CancellationToken cancellationToken)
         {
             AddEmployeeCommand command = Mapper.Map<AddEmployeeCommand>(addDto);
 

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using Presentation.WebAPI.Package.Wrappers;
-using System.Net;
 
 namespace Presentation.WebAPI.Package.ExceptionHandlers
 {
@@ -27,7 +26,7 @@ namespace Presentation.WebAPI.Package.ExceptionHandlers
 
             }
 
-            ErrorResponse<Exception> errorResponse = new(exception, (HttpStatusCode)httpContext.Response.StatusCode, instance, traceId, message: message);
+            ErrorResponse<Exception> errorResponse = new(exception, httpContext, message: message);
 
             await httpContext.Response.WriteAsJsonAsync(errorResponse, cancellationToken);
 

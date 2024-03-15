@@ -18,7 +18,26 @@ namespace Presentation.WebAPI.Package.Controllers
         [NonAction]
         public CreatedResult Created<T>(string routeName, Result<T> result)
         {
-            return Created(GetUri(routeName, default), result.Data);
+            HttpContext.Response.StatusCode = StatusCodes.Status201Created;
+
+            SuccessResponse<T> response = new(HttpContext)
+            {
+                Data = result.Data
+            };
+
+            return Created(GetUri(routeName, default), response);
+        }
+
+        public CreatedResult Created<T>(string routeName, Results<T> results)
+        {
+            HttpContext.Response.StatusCode = StatusCodes.Status201Created;
+
+            SuccessResponses<T> responses = new(HttpContext)
+            {
+                Data = results.Data
+            };
+
+            return Created(GetUri(routeName, default), responses);
         }
 
         [NonAction]
