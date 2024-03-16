@@ -1,4 +1,7 @@
-﻿namespace Presentation.WebAPI.Package.Extensions
+﻿using Presentation.WebAPI.Package.Middwares;
+using Serilog;
+
+namespace Presentation.WebAPI.Package.Extensions
 {
     public static class WebApplicationExtensions
     {
@@ -16,6 +19,10 @@
             application.UseAuthorization();
 
             application.MapControllers();
+
+            application.UseMiddleware<RequestLogContextMiddleware>();
+
+            application.UseSerilogRequestLogging();
 
             application.UseExceptionHandler();
         }

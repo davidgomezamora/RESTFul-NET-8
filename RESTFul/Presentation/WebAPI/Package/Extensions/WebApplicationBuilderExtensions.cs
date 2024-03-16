@@ -6,9 +6,9 @@ namespace Presentation.WebAPI.Package.Extensions
     {
         public static void AddPresentationLayerBase(this WebApplicationBuilder builder)
         {
-            builder.Host.UseSerilog((ctx, loggerConfig) =>
+            builder.Host.UseSerilog((ctx, conf) =>
             {
-                loggerConfig.ReadFrom.Configuration(ctx.Configuration);
+                conf.ReadFrom.Configuration(ctx.Configuration);
             });
         }
     }

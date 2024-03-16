@@ -30,7 +30,7 @@ namespace Presentation.WebAPI.Package.Extensions
                 opt.ReportApiVersions = true;
                 opt.ApiVersionReader = ApiVersionReader.Combine(
                     new QueryStringApiVersionReader("api-version"),
-                    new HeaderApiVersionReader("X-api-version"),
+                    new HeaderApiVersionReader("X-Api-Version"),
                     new MediaTypeApiVersionReader("version"));
             }).AddMvc(opt =>
             {

@@ -3,7 +3,7 @@
     public class ResultBase
     {
         public bool Succeeded { get; }
-        public string? Message { get; }
+        public string? Message { get; set; }
 
         public ResultBase(bool succeeded, string? message = null)
         {

@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infraestructure.Persistence.Package.Repository
 {
-    public class Repository<T> : RepositoryBaseExtensions<T>, IRepository<T> where T : class
+    public class ReadRepository<T> : RepositoryBaseExtensions<T>, IReadRepository<T> where T : class
     {
-        public Repository(DbContext dbContext) : base(dbContext)
+        public ReadRepository(DbContext dbContext) : base(dbContext)
         {
         }
     }

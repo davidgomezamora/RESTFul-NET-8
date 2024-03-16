@@ -6,19 +6,21 @@ namespace Presentation.WebAPI.Package.ExceptionHandlers
     public class GlobalExceptionHandler : IExceptionHandler
     {
         private readonly IHostEnvironment _environment;
+        private readonly ILogger<ApiExceptionHandler> _logger;
 
-        public GlobalExceptionHandler(IHostEnvironment environment)
+        public GlobalExceptionHandler(IHostEnvironment environment, ILogger<ApiExceptionHandler> logger)
         {
             _environment = environment ?? throw new ArgumentNullException(nameof(environment));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {
+            _logger.LogError(exception: exception, message: "Exception ocurred: {Message}", exception.Message);
+
             httpContext.Response.ContentType = "application/problem+json";
             httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-            string instance = httpContext.Request.Path;
-            string traceId = httpContext.TraceIdentifier;
             string message = "An unexpected error occurred";
 
             if (_environment.IsDevelopment())

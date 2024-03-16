@@ -1,6 +1,5 @@
 ﻿using Core.Application.Package.Behaviors;
 using FluentValidation;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -12,8 +11,13 @@ namespace Core.Application.Package.Extensions
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+            services.AddMediatR(cfg =>
+            {
+                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+
+                cfg.AddOpenBehavior(typeof(RequestLoggingBehavior<,>));
+                cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            });
         }
     }
 }

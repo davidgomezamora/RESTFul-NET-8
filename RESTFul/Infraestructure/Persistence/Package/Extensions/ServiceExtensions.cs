@@ -10,6 +10,7 @@ namespace Infraestructure.Persistence.Package.Extensions
         {
             #region Repositories
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
+            services.AddTransient(typeof(IReadRepository<>), typeof(ReadRepository<>));
             #endregion
         }
     }
