@@ -11,9 +11,11 @@ namespace Presentation.WebAPI.Package.ProblemDetailWriters
 
         public ValueTask WriteAsync(ProblemDetailsContext context)
         {
+            string? suggestion = context.ProblemDetails.Detail;
+
             throw new ApiVersionException()
             {
-                Suggestions = [context.ProblemDetails.Detail ?? ""]
+                Suggestions = [suggestion ?? ""]
             };
         }
     }

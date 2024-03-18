@@ -2,7 +2,6 @@
 using Presentation.WebAPI.Package.Exceptions;
 using Presentation.WebAPI.Package.Wrappers;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Presentation.WebAPI.Package.ExceptionHandlers
 {
