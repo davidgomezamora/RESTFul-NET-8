@@ -5,16 +5,10 @@ using MediatR;
 
 namespace Core.Application.Package.Queries.GetAll
 {
-    public class GetAllQueryHandler<TQuery, TEntity, TResponse> : IRequestHandler<TQuery, Results<TResponse>> where TQuery : GetAllQuery<TResponse> where TEntity : class
+    public class GetAllQueryHandler<TQuery, TEntity, TResponse>(IReadRepository<TEntity> repository, IMapper mapper) : IRequestHandler<TQuery, Results<TResponse>> where TQuery : GetAllQuery<TResponse> where TEntity : class
     {
-        protected readonly IReadRepository<TEntity> _repository;
-        protected readonly IMapper _mapper;
-
-        public GetAllQueryHandler(IReadRepository<TEntity> repository, IMapper mapper)
-        {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        }
+        protected readonly IReadRepository<TEntity> _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+        protected readonly IMapper _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 
         public async Task<Results<TResponse>> Handle(TQuery request, CancellationToken cancellationToken)
         {

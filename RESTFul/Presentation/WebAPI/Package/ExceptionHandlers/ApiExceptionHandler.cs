@@ -4,16 +4,10 @@ using Presentation.WebAPI.Package.Wrappers;
 
 namespace Presentation.WebAPI.Package.ExceptionHandlers
 {
-    public class ApiExceptionHandler : IExceptionHandler
+    public class ApiExceptionHandler(IHostEnvironment environment, ILogger<ApiExceptionHandler> logger) : IExceptionHandler
     {
-        private readonly IHostEnvironment _environment;
-        private readonly ILogger<ApiExceptionHandler> _logger;
-
-        public ApiExceptionHandler(IHostEnvironment environment, ILogger<ApiExceptionHandler> logger)
-        {
-            _environment = environment ?? throw new ArgumentNullException(nameof(environment));
-            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        }
+        private readonly IHostEnvironment _environment = environment ?? throw new ArgumentNullException(nameof(environment));
+        private readonly ILogger<ApiExceptionHandler> _logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
         public async ValueTask<bool> TryHandleAsync(HttpContext httpContext, Exception exception, CancellationToken cancellationToken)
         {

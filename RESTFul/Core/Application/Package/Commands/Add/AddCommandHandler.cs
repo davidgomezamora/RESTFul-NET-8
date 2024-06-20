@@ -5,16 +5,10 @@ using MediatR;
 
 namespace Core.Application.Package.Commands.Add
 {
-    public class AddCommandHandler<TCommand, TEntity, TResponse> : IRequestHandler<TCommand, Result<TResponse>> where TCommand : AddCommand<TResponse> where TEntity : class
+    public class AddCommandHandler<TCommand, TEntity, TResponse>(IRepository<TEntity> repository, IMapper mapper) : IRequestHandler<TCommand, Result<TResponse>> where TCommand : AddCommand<TResponse> where TEntity : class
     {
-        protected readonly IRepository<TEntity> _repository;
-        protected readonly IMapper _mapper;
-
-        public AddCommandHandler(IRepository<TEntity> repository, IMapper mapper)
-        {
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-        }
+        protected readonly IRepository<TEntity> _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+        protected readonly IMapper _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 
         public async Task<Result<TResponse>> Handle(TCommand request, CancellationToken cancellationToken)
         {

@@ -5,10 +5,7 @@ using Core.Domain.Entities;
 
 namespace Core.Application.Features.Employee.Queries.GetAll
 {
-    public class GetAllEmployeeQueryHandler : GetAllQueryHandler<GetAllEmployeeQuery, Employees, IEnumerable<GetAllEmployeeQuery>>
+    public class GetAllEmployeeQueryHandler(IReadRepository<Employees> repository, IMapper mapper) : GetAllQueryHandler<GetAllEmployeeQuery, Employees, IEnumerable<GetAllEmployeeQuery>>(repository, mapper)
     {
-        public GetAllEmployeeQueryHandler(IReadRepository<Employees> repository, IMapper mapper) : base(repository, mapper)
-        {
-        }
     }
 }

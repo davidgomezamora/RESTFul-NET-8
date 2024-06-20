@@ -5,14 +5,9 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Infraestructure.Persistence.Package.Interceptors
 {
-    internal sealed class AddedAuditableInterceptor : SaveChangesInterceptor
+    internal sealed class AddedAuditableInterceptor(IDateTimeService dateTimeService) : SaveChangesInterceptor
     {
-        private readonly IDateTimeService _dateTimeService;
-
-        public AddedAuditableInterceptor(IDateTimeService dateTimeService)
-        {
-            _dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
-        }
+        private readonly IDateTimeService _dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
 
         public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
         {

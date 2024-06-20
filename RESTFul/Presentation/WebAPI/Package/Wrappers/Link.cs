@@ -1,16 +1,9 @@
 ﻿namespace Presentation.WebAPI.Package.Wrappers
 {
-    public class Link
+    public class Link(string? href, string rel, string method)
     {
-        public readonly string Href;
-        public readonly string Rel;
-        public readonly string Method;
-
-        public Link(string? href, string rel, string method)
-        {
-            Href = href ?? "https://";
-            Rel = rel;
-            Method = method;
-        }
+        public readonly string Href = href ?? "https://";
+        public readonly string Rel = rel;
+        public readonly string Method = method;
     }
 }

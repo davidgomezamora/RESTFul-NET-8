@@ -5,10 +5,7 @@ using Core.Domain.Entities;
 
 namespace Core.Application.Features.Employee.Commands.Add
 {
-    public class AddEmployeeCommandHandler : AddCommandHandler<AddEmployeeCommand, Employees, int>
+    public class AddEmployeeCommandHandler(IRepository<Employees> repository, IMapper mapper) : AddCommandHandler<AddEmployeeCommand, Employees, int>(repository, mapper)
     {
-        public AddEmployeeCommandHandler(IRepository<Employees> repository, IMapper mapper) : base(repository, mapper)
-        {
-        }
     }
 }

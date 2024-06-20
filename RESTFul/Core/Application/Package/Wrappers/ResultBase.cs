@@ -1,14 +1,8 @@
 ﻿namespace Core.Application.Package.Wrappers
 {
-    public class ResultBase
+    public class ResultBase(bool succeeded, string? message = null)
     {
-        public bool Succeeded { get; }
-        public string? Message { get; set; }
-
-        public ResultBase(bool succeeded, string? message = null)
-        {
-            Succeeded = succeeded;
-            Message = message;
-        }
+        public bool Succeeded { get; } = succeeded;
+        public string? Message { get; set; } = message;
     }
 }

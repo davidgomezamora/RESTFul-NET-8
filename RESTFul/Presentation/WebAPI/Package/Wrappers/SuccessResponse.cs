@@ -2,13 +2,9 @@
 
 namespace Presentation.WebAPI.Package.Wrappers
 {
-    public class SuccessResponse<T> : Response
+    public class SuccessResponse<T>(HttpContext httpContext) : Response(true, httpContext)
     {
         [JsonPropertyOrder(1)]
         public T? Data { get; set; }
-
-        public SuccessResponse(HttpContext httpContext) : base(true, httpContext)
-        {
-        }
     }
 }

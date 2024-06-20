@@ -2,16 +2,10 @@
 
 namespace Presentation.WebAPI.Package.Middwares
 {
-    public class RequestLogContextMiddleware
+    public class RequestLogContextMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
     {
-        private readonly RequestDelegate _next;
-        private readonly ILogger _logger;
-
-        public RequestLogContextMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
-        {
-            _next = next ?? throw new ArgumentNullException(nameof(next));
-            _logger = loggerFactory.CreateLogger<RequestLogContextMiddleware>();
-        }
+        private readonly RequestDelegate _next = next ?? throw new ArgumentNullException(nameof(next));
+        private readonly ILogger _logger = loggerFactory.CreateLogger<RequestLogContextMiddleware>();
 
         public async Task Invoke(HttpContext context)
         {

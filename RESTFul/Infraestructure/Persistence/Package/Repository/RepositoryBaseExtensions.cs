@@ -3,14 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infraestructure.Persistence.Package.Repository
 {
-    public class RepositoryBaseExtensions<T> : RepositoryBase<T> where T : class
+    public class RepositoryBaseExtensions<T>(DbContext dbContext) : RepositoryBase<T>(dbContext) where T : class
     {
-        private readonly DbContext _dbContext;
-
-        public RepositoryBaseExtensions(DbContext dbContext) : base(dbContext)
-        {
-            _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-        }
+        private readonly DbContext _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 
         public TId? GetKeyValue<TId>(T entity)
         {

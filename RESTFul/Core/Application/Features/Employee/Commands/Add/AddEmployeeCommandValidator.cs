@@ -1,6 +1,7 @@
 ﻿using Core.Application.Package.Consants;
 using Core.Application.Package.Extensions;
 using FluentValidation;
+using Shared.Package.Consants;
 
 namespace Core.Application.Features.Employee.Commands.Add
 {

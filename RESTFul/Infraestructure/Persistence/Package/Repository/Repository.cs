@@ -3,10 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infraestructure.Persistence.Package.Repository
 {
-    public class Repository<T> : RepositoryBaseExtensions<T>, IRepository<T> where T : class
+    public class Repository<T>(DbContext dbContext) : RepositoryBaseExtensions<T>(dbContext), IRepository<T> where T : class
     {
-        public Repository(DbContext dbContext) : base(dbContext)
-        {
-        }
     }
 }
