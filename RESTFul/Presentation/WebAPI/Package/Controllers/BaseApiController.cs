@@ -2,10 +2,13 @@
 using Core.Application.Package.Wrappers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
+using Presentation.WebAPI.Package.Constants;
 using Presentation.WebAPI.Package.Wrappers;
 
 namespace Presentation.WebAPI.Package.Controllers
 {
+    [EnableRateLimiting(RateLimitPolicies.Default)]
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class BaseApiController : ControllerBase
@@ -26,18 +29,6 @@ namespace Presentation.WebAPI.Package.Controllers
             };
 
             return Created(GetUri(routeName, default), response);
-        }
-
-        public CreatedResult Created<T>(string routeName, Results<T> results)
-        {
-            HttpContext.Response.StatusCode = StatusCodes.Status201Created;
-
-            SuccessResponses<T> responses = new(HttpContext)
-            {
-                Data = results.Data
-            };
-
-            return Created(GetUri(routeName, default), responses);
         }
 
         [NonAction]

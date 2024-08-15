@@ -14,6 +14,8 @@ namespace Presentation.WebAPI.Package.Extensions
                 application.UseSwaggerUI();
             }
 
+            application.UseRateLimiter();
+
             application.UseHttpsRedirection();
 
             application.UseAuthorization();

@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Core.Application.Package.Commands.Add
 {
-    public class AddCommand<T> : IRequest<Result<T>>
+    public class AddEntityCommand<T> : IRequest<Result<T>>
     {
     }
 }

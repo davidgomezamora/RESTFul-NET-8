@@ -19,11 +19,22 @@ namespace Infraestructure.Persistence.Package.Extensions
 
         public static void AddDbContext<T>(this IServiceCollection services, IConfiguration configuration) where T : DbContext
         {
+            string dbContextName = typeof(T).Name;
+
+            if (!dbContextName.Contains("Context"))
+            {
+                throw new Exception($"The database context <{dbContextName}> does not contain the keyword 'Context'.");
+            }
+
+            string dbContextConnectionName = dbContextName.Replace("Context", "Database");
+
+            string dbContextConnection = configuration.GetConnectionString(dbContextConnectionName) ?? throw new Exception($"Connection string <{dbContextConnectionName}> does not exist for database context <{dbContextName}>. If the connection string exists, verify that it is located within the 'ConnectionString' section.");
+
             services.AddDbContext<T>((sp, opt) =>
             {
                 opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
-                opt.UseSqlServer(configuration.GetConnectionString($"{typeof(T).Name}Database"), x =>
+                opt.UseSqlServer(dbContextConnection, x =>
                 {
                     x.MigrationsAssembly(typeof(T).Assembly.FullName);
                 });
