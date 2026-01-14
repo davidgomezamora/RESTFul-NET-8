@@ -3,7 +3,8 @@ using MediatR;
 
 namespace Core.Application.Package.Queries.GetAll
 {
-    public class GetAllQuery<T> : IRequest<Results<T>>
+    public class GetAllQuery<TEntity> : IRequest<Results<TEntity>>
     {
+        public IEnumerable<Func<TEntity, bool>>? Filters { get; set; }
     }
 }

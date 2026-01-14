@@ -10,9 +10,12 @@ namespace Core.Application.Package.Extensions
         public static void AddApplicationLayerBase(this IServiceCollection services)
         {
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
             services.AddMediatR(cfg =>
             {
+                cfg.TypeEvaluator = x => !x.ContainsGenericParameters;
                 cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
 
                 cfg.AddOpenBehavior(typeof(RequestLoggingBehavior<,>));

@@ -1,9 +1,6 @@
-﻿using Core.Application.Package.Commands.Add;
-using Core.Domain.Entities;
-
-namespace Core.Application.Features.Employee.Commands.Add
+﻿namespace Core.Application.Features.Employee.Queries.Structures
 {
-    public class AddEmployeeCommand : AddEntityCommand<Employees>
+    public struct GetEmployeeQuery
     {
         public required string LastName { get; set; }
         public required string FirstName { get; set; }

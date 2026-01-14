@@ -5,23 +5,23 @@ using MediatR;
 
 namespace Core.Application.Package.Queries.GetAll
 {
-    public class GetAllQueryHandler<TQuery, TEntity, TResponse>(IReadRepository<TEntity> repository, IMapper mapper) : IRequestHandler<TQuery, Results<TResponse>> where TQuery : GetAllQuery<TResponse> where TEntity : class
+    public class GetAllQueryHandler<TQuery, TEntity, TDataResult>(IReadRepository<TEntity> repository, IMapper mapper) : IRequestHandler<TQuery, Results<TDataResult>> where TQuery : GetAllQuery<TDataResult> where TEntity : class
     {
         protected readonly IReadRepository<TEntity> _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         protected readonly IMapper _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 
-        public async Task<Results<TResponse>> Handle(TQuery request, CancellationToken cancellationToken)
+        public async Task<Results<TDataResult>> Handle(TQuery request, CancellationToken cancellationToken)
         {
             IEnumerable<TEntity> entities = await _repository.ListAsync(cancellationToken);
 
             if (entities is null)
             {
-                return new Results<TResponse>($"No records found in the database, for the entity <{nameof(TEntity)}>.");
+                return new Results<TDataResult>($"No records found in the database, for the entity <{nameof(TEntity)}>.");
             }
 
-            TResponse response = _mapper.Map<TResponse>(entities);
+            IEnumerable<TDataResult> results = _mapper.Map<IEnumerable<TDataResult>>(entities);
 
-            return new Results<TResponse>(response, $"<{entities.Count()}> records will be found in the database, for the understanding <{nameof(TEntity)}>");
+            return new Results<TDataResult>(results, $"<{entities.Count()}> records will be found in the database, for the understanding <{nameof(TEntity)}>");
         }
     }
 }

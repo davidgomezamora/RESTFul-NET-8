@@ -14,6 +14,7 @@ namespace Infraestructure.Persistence.Package.Extensions
             #region Repositories
             services.AddTransient(typeof(IRepository<>), typeof(Repository<>));
             services.AddTransient(typeof(IReadRepository<>), typeof(ReadRepository<>));
+            services.AddScoped(typeof(AuditngInterceptor));
             #endregion
         }
 
@@ -40,9 +41,7 @@ namespace Infraestructure.Persistence.Package.Extensions
                 });
 
                 opt.AddInterceptors(
-                    sp.GetRequiredService<ModifiedAuditableInterceptor>(),
-                    sp.GetRequiredService<AddedAuditableInterceptor>(),
-                    sp.GetRequiredService<DeletedAuditableInterceptor>());
+                    sp.GetRequiredService<AuditngInterceptor>());
             });
         }
     }

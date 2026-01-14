@@ -18,7 +18,7 @@ namespace Core.Application.Package.Behaviors
 
                 IEnumerable<ValidationFailure> validationFailures = validationResults.SelectMany(x => x.Errors).Where(y => y is not null);
 
-                if (!validationFailures.Any())
+                if (validationFailures.Any())
                 {
                     throw new ValidationException(validationFailures);
                 }

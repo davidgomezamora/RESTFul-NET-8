@@ -1,14 +1,14 @@
 ﻿namespace Core.Application.Package.Wrappers
 {
-    public class Result<T> : ResultBase
+    public class Result<TData> : ResultBase
     {
-        public T? Data { get; }
+        public TData? Data { get; }
 
         public Result(string message) : base(false, message)
         {
         }
 
-        public Result(T data, string? message = null) : base(true, message)
+        public Result(TData data, string? message = null) : base(true, message)
         {
             Data = data;
         }

@@ -1,10 +1,8 @@
 ﻿using Asp.Versioning;
 using Core.Application.Features.Employee.Commands.Add;
-using Core.Application.Package.Wrappers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.RateLimiting;
-using Presentation.WebAPI.Controllers.v1.Employees.DTOs;
-using Presentation.WebAPI.Package.Constants;
+using Presentation.WebAPI.Controllers.v1.Employees.DTOs.Requests;
+using Presentation.WebAPI.Controllers.v1.Employees.DTOs.Responses;
 using Presentation.WebAPI.Package.Controllers;
 
 namespace Presentation.WebAPI.Controllers.v1.Employees
@@ -14,35 +12,29 @@ namespace Presentation.WebAPI.Controllers.v1.Employees
     {
         public const string SingularResourceName = "Employee";
         public const string PluralResourceName = "Employees";
-        public const string GetSingleEndPoint = $"Get{SingularResourceName}";
-        public const string AddSingleEndPoint = $"Add{SingularResourceName}";
-        public const string UpdateSingleEndPoint = $"Update{SingularResourceName}";
-        public const string RemoveSingleEndPoint = $"Remove{SingularResourceName}";
-        public const string GetListEndPoint = $"Get{PluralResourceName}List";
-        public const string GetPagedEndPoint = $"Get{PluralResourceName}";
-        public const string AddBulkEndPoint = $"Add{PluralResourceName}";
-        public const string UpdateBulkEndPoint = $"Update{PluralResourceName}";
-        public const string RemoveBulkEndPoint = $"Remove{PluralResourceName}";
+        public const string AddSingleEndpoint = $"{AddEndpointPrefix}{SingularResourceName}";
+        public const string GetSingleEndpoint = $"{GetEndpointPrefix}{SingularResourceName}";
+        public const string UpdateSingleEndpoint = $"{UpdateEndpointPrefix}{SingularResourceName}";
+        public const string RemoveSingleEndpoint = $"{RemoveEndpointPrefix}{SingularResourceName}";
+        public const string AddBulkEndpoint = $"{AddEndpointPrefix}{PluralResourceName}";
+        public const string GetListEndpoint = $"{GetEndpointPrefix}{PluralResourceName}{GetListEndpointSuffix}";
+        public const string GetPagedEndpoint = $"{GetEndpointPrefix}{PluralResourceName}";
+        public const string UpdateBulkEndpoint = $"{UpdateEndpointPrefix}{PluralResourceName}";
+        public const string RemoveBulkEndpoint = $"{RemoveEndpointPrefix}{PluralResourceName}";
 
-        [HttpGet(Name = GetSingleEndPoint)]
-        public async Task<IActionResult> GetAsync(CancellationToken cancellationToken)
+        public EmployeesController() : base(SingularResourceName, PluralResourceName) { }
+
+        [HttpPost(Name = AddSingleEndpoint)]
+        public async Task<IActionResult> AddAsync([FromBody] AddEmployeeRequest request, CancellationToken cancellationToken)
         {
-            return Ok();
+            return await base.AddAsync<AddEmployeeRequest, EmployeeResponse, AddEmployeeCommand, Core.Domain.Entities.Employees>(request, cancellationToken);
         }
 
-        [HttpPost(Name = AddSingleEndPoint)]
-        public async Task<IActionResult> AddAsync([FromBody] EmployeeForAddDto addDto, CancellationToken cancellationToken)
+        [HttpGet("{id}", Name = GetSingleEndpoint)]
+        public async Task<IActionResult> GetAsync([FromQuery] int id, CancellationToken cancellationToken)
         {
-            AddEmployeeCommand command = Mapper.Map<AddEmployeeCommand>(addDto);
-
-            Result<int> result = await Mediator.Send(command, cancellationToken);
-
-            if (!result.Succeeded)
-            {
-                return BadRequest("The record could not be added.");
-            }
-
-            return Created(GetSingleEndPoint, result);
+            // return await base.GetAsync<EmployeeForDto, GetEmployeeQuery, int>(id);
+            return Ok();
         }
     }
 }

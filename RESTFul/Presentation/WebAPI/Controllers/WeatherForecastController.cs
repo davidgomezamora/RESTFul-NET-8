@@ -18,13 +18,6 @@ namespace Presentation.WebAPI.Controllers
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
-            List<WeatherForecast> test = null;
-
-            if (test.Count > 0)
-            {
-                string hola = "hola";
-            }
-
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

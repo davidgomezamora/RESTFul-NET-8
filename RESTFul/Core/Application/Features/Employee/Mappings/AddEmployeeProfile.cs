@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
-using Core.Application.Features.Employee.Queries.GetAll;
+using Core.Application.Features.Employee.Commands.Add;
 using Core.Domain.Entities;
 
-namespace Core.Application.Features.Employee.Mapings
+namespace Core.Application.Features.Employee.Mappings
 {
     public class AddEmployeeProfile : Profile
     {
         public AddEmployeeProfile()
         {
-            CreateMap<GetAllEmployeeQuery, Employees>();
+            CreateMap<AddEmployeeCommand, Employees>();
         }
     }
 }

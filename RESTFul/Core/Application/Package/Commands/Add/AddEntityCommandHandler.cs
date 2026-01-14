@@ -5,30 +5,28 @@ using MediatR;
 
 namespace Core.Application.Package.Commands.Add
 {
-    public class AddEntityCommandHandler<TCommand, TEntity, TResult>(IRepository<TEntity> repository, IMapper mapper) : IRequestHandler<TCommand, Result<TResult>> where TCommand : AddEntityCommand<TResult> where TEntity : class
+    public class AddEntityCommandHandler<TCommand, TEntity>(IRepository<TEntity> repository, IMapper mapper) : IRequestHandler<TCommand, Result<TEntity>> where TCommand : AddEntityCommand<TEntity> where TEntity : class
     {
         protected readonly IRepository<TEntity> _repository = repository ?? throw new ArgumentNullException(nameof(repository));
         protected readonly IMapper _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 
-        public async Task<Result<TResult>> Handle(TCommand request, CancellationToken cancellationToken)
+        public async Task<Result<TEntity>> Handle(TCommand request, CancellationToken cancellationToken)
         {
             TEntity entity = _mapper.Map<TEntity>(request);
 
-            TEntity resultEntity = await _repository.AddAsync(entity, cancellationToken);
+            TEntity result = await _repository.AddAsync(entity, cancellationToken);
 
-            if (resultEntity is null)
+            if (result is null)
             {
-                return new Result<TResult>($"The entity <{nameof(TEntity)}> could not be added to the database.");
+                return new Result<TEntity>($"The entity <{nameof(TEntity)}> could not be added to the database.");
             }
 
-            TResult? responseType = _repository.GetKeyValue<TResult>(resultEntity);
-
-            if (responseType is null)
+            if (result is null)
             {
-                return new Result<TResult>($"The entity <{nameof(TEntity)}> was added to the database, but the identifier of the new record could not be retrieved.");
+                return new Result<TEntity>($"The entity <{nameof(TEntity)}> was added to the database, but the identifier of the new record could not be retrieved.");
             }
 
-            return new Result<TResult>(responseType, $"The entity <{nameof(TEntity)}> was added to the database.");
+            return new Result<TEntity>(result, $"The entity <{nameof(TEntity)}> was added to the database.");
         }
     }
 }

@@ -5,6 +5,7 @@ using Presentation.WebAPI.Package.Constants;
 using Presentation.WebAPI.Package.ExceptionHandlers;
 using Presentation.WebAPI.Package.Extensions.Options;
 using Presentation.WebAPI.Package.ProblemDetailWriters;
+using System.Reflection;
 using System.Threading.RateLimiting;
 
 namespace Presentation.WebAPI.Package.Extensions
@@ -13,6 +14,8 @@ namespace Presentation.WebAPI.Package.Extensions
     {
         public static void AddPresentationLayerBase(this IServiceCollection services, PresentationLayerBaseOptions options)
         {
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             services.AddEndpointsApiExplorer();
 
             services.AddControllers();

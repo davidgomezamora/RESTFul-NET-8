@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Infraestructure.Persistence.Package.Interceptors
 {
-    internal sealed class DeletedAuditableInterceptor(IDateTimeService dateTimeService) : SaveChangesInterceptor
+    internal sealed class AuditngInterceptor(IDateTimeService dateTimeService) : SaveChangesInterceptor
     {
         private readonly IDateTimeService _dateTimeService = dateTimeService ?? throw new ArgumentNullException(nameof(dateTimeService));
 
@@ -23,9 +23,30 @@ namespace Infraestructure.Persistence.Package.Interceptors
 
         private static void Audit(DbContext context)
         {
-            IEnumerable<EntityEntry> entityEntries = context.ChangeTracker.Entries().Where(x => x.State is EntityState.Deleted);
+            Added(context.ChangeTracker.Entries().Where(x => x.State is EntityState.Added));
+            Modified(context.ChangeTracker.Entries().Where(x => x.State is EntityState.Modified));
+            Deleted(context.ChangeTracker.Entries().Where(x => x.State is EntityState.Deleted));
+        }
 
-            foreach (var entityEntry in entityEntries)
+        private static void Added(IEnumerable<EntityEntry> entities)
+        {
+            foreach (var entity in entities)
+            {
+                // Set entry audit
+            }
+        }
+
+        private static void Modified(IEnumerable<EntityEntry> entities)
+        {
+            foreach (var entity in entities)
+            {
+                // Set entry audit
+            }
+        }
+
+        private static void Deleted(IEnumerable<EntityEntry> entities)
+        {
+            foreach (var entity in entities)
             {
                 // Set entry audit
             }
